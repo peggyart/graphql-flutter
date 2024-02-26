@@ -104,12 +104,7 @@ abstract class BaseOptions<TParsed extends Object?> {
       identical(this, other) ||
       (other is BaseOptions &&
           runtimeType == other.runtimeType &&
-          const ListEquality<Object?>(
-            DeepCollectionEquality(),
-          ).equals(
-            other.properties,
-            properties,
-          ));
+          jsonMapEquals(other.properties, properties));
 
   @override
   int get hashCode => const ListEquality<Object?>(

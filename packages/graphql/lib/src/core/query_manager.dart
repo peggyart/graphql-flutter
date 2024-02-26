@@ -19,9 +19,6 @@ import 'package:graphql/src/scheduler/scheduler.dart';
 
 import 'package:graphql/src/core/_query_write_handling.dart';
 
-bool Function(dynamic a, dynamic b) _deepEquals =
-    const DeepCollectionEquality().equals;
-
 class QueryManager {
   QueryManager({
     required this.link,
@@ -495,7 +492,7 @@ class QueryManager {
   ) =>
       cachedData != null &&
       query.latestResult != null &&
-      (alwaysRebroadcast || !_deepEquals(query.latestResult!.data, cachedData));
+      (alwaysRebroadcast || !jsonMapEquals(query.latestResult!.data, cachedData));
 
   void setQuery(ObservableQuery<Object?> observableQuery) {
     queries[observableQuery.queryId] = observableQuery;
